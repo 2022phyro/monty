@@ -88,7 +88,7 @@ int check(char *s)
 	return (flag);
 }
 /**
- * itoa - converts integer to string
+ * itoan - converts integer to string
  *
  * @n: the integer
  * Return: the string
@@ -96,6 +96,7 @@ int check(char *s)
 char *itoan(int n)
 {
 	char *str = malloc(sizeof(char) * 13);
+
 	if (str == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
