@@ -86,6 +86,8 @@ char **split(char *string, char *delimiter, unsigned int max)
 			}
 		if (prev == '\0' && flipped == false)
 			appendStr(&array, &arr_size, &string[str_ind], arr_ind++);
+		if (string[str_ind + 1] == delimiter[i] && strcmp(delimiter, "\n") == 0 )
+			appendStr(&array, &arr_size, "#", arr_ind++);
 		if (max && max + 1 == arr_ind)
 			break;
 		prev = string[str_ind];

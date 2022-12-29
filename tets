@@ -1,7 +1,27 @@
-push 3
-push 4
-push 5
+push 98
+# Comment
 push 2
-pall
-rotr
+push 3
+		# Another Comment
+	#
+#Above is an empty Comment
+pint
+nop
+push 4
+swap
+pop
+# Another just below
+
+#
+add
+push 1
+sub
+push 2
+div
+push 12
+mul
+push 9
+mod
+push 65
+pchar
 pall
