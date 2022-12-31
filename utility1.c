@@ -56,7 +56,7 @@ bool appendStr(char ***arr, size_t *size, char *str, int index)
  * - delimiters is empty
  */
 
-char **split(char *string, char *delimiter, size_t max)
+char **split(char *string, char *delimiter)
 {
 	char **array, prev = '\0', curr;
 	size_t arr_size = 2, arr_ind = 0, str_ind, i;
@@ -74,6 +74,8 @@ char **split(char *string, char *delimiter, size_t max)
 	for (str_ind = 0; string[str_ind]; str_ind++)
 	{
 		curr = string[str_ind];
+		if ((curr == '\n' && (string[str_ind - 1] == '\0' || string[str_ind -1 ] == '\n')) && strcmp(delimiter,"\n") == 0)
+			appendStr(&array, &arr_size, "#", arr_ind++);
 		flipped = false;
 		for (i = 0; delimiter[i]; i++)
 			if (curr == delimiter[i])
@@ -86,8 +88,6 @@ char **split(char *string, char *delimiter, size_t max)
 			appendStr(&array, &arr_size, &string[str_ind], arr_ind++);
 		if (string[str_ind + 1] == delimiter[i] && strcmp(delimiter, "\n") == 0)
 			appendStr(&array, &arr_size, "#", arr_ind++);
-		if (max && max + 1 == arr_ind)
-			break;
 		prev = string[str_ind];
 	}
 	if (arr_ind)
