@@ -42,10 +42,6 @@ bool appendStr(char ***arr, size_t *size, char *str, int index)
  * @string: the string to split
  *
  * @delimiter: a list of delimiters to use to split the string
- *
- * @max: the maximum number of times the string should be splitted
- * Set this to 0 to split infinitely
- *
  * Return: A null-terminated array of strings.
  * NULL is returned if malloc failed or if the string
  * could not be split; this could be because:
@@ -74,8 +70,6 @@ char **split(char *string, char *delimiter)
 	for (str_ind = 0; string[str_ind]; str_ind++)
 	{
 		curr = string[str_ind];
-		if ((curr == '\n' && (string[str_ind - 1] == '\0' || string[str_ind -1 ] == '\n')) && strcmp(delimiter,"\n") == 0)
-			appendStr(&array, &arr_size, "#", arr_ind++);
 		flipped = false;
 		for (i = 0; delimiter[i]; i++)
 			if (curr == delimiter[i])
@@ -86,7 +80,8 @@ char **split(char *string, char *delimiter)
 			}
 		if (prev == '\0' && flipped == false)
 			appendStr(&array, &arr_size, &string[str_ind], arr_ind++);
-		if (string[str_ind + 1] == delimiter[i] && strcmp(delimiter, "\n") == 0)
+		if (string[str_ind + 1] == '\n' && strcmp(delimiter, "\n") == 0 &&
+				string[str_ind] == '\0')
 			appendStr(&array, &arr_size, "#", arr_ind++);
 		prev = string[str_ind];
 	}
